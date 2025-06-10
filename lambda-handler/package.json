@@ -1,0 +1,9 @@
+{
+  "name": "chat-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function for Gen AI chatbot",
+  "main": "chat.js",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.0.0"
+  }
+}

@@ -1,3 +1,7 @@
+# CDK
+.cdk.staging
+cdk.out
+
 # Logs
 logs
 *.log
