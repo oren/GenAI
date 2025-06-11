@@ -5,5 +5,5 @@ const { MyGenAiChatbotStack } = require('../lib/my-gen-ai-chatbot-stack');
 
 const app = new cdk.App();
 new MyGenAiChatbotStack(app, 'MyGenAiChatbotStack', {
-  env: { account: '123456789012', region: 'us-west-2' },
+  env: { account: process.env.AWS_ACCOUNT, region: 'us-west-2' },
 });
