@@ -47,7 +47,7 @@ class MyGenAiChatbotStack extends Stack {
     const httpApi = new apigw.HttpApi(this, 'GenAiChatbotApi', {
       description: 'API for Gen AI Chatbot',
       corsPreflight: { // Optional: configure CORS for browser-based clients
-        allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key'],
+        allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token'],
         allowMethods: [
           apigw.CorsHttpMethod.OPTIONS,
           apigw.CorsHttpMethod.POST,

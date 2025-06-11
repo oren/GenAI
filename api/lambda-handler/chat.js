@@ -19,7 +19,7 @@ exports.handler = async (event) => {
             return {
                 statusCode: 400,
                 body: JSON.stringify({ message: "Missing 'prompt' in request body" }),
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             };
         }
     } catch (error) {
@@ -27,7 +27,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 400,
             body: JSON.stringify({ message: "Invalid JSON in request body" }),
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
         };
     }
 
@@ -96,7 +96,7 @@ exports.handler = async (event) => {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
                 "Access-Control-Allow-Methods": "POST,OPTIONS"
             },
         };
@@ -112,7 +112,7 @@ exports.handler = async (event) => {
                 error: errorMessage,
                 details: errorDetails
             }),
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
         };
     }
 };

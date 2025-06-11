@@ -1,0 +1,116 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    padding: 20px;
+    margin: 0;
+    background-color: #e0e6ed;
+    border-bottom: 1px solid #d4dae0;
+}
+
+.chat-window {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 400px; /* Adjust as needed */
+    border-bottom: 1px solid #d4dae0;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    line-height: 1.4;
+}
+
+.user-message {
+    background-color: #3498db;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: #e9ecef;
+    color: #333;
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+}
+
+.message p {
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.input-area {
+    display: flex;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+#userInput {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+#userInput:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+#sendButton {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+#sendButton:hover {
+    background-color: #27ae60;
+}
+
+#sendButton:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+
+.loading-indicator, .error-message {
+    text-align: center;
+    padding: 10px;
+    font-style: italic;
+}
+
+.error-message {
+    color: red;
+}

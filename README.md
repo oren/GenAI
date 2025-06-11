@@ -1,8 +1,13 @@
  GenAI
 
+## Run
+```
+cd website
+python -m http.server 8000
+Open http://localhost:8000
+```
 ## Useful commands
-
 * `npm run test`         perform the jest unit tests
-* `npx cdk deploy`       deploy this stack to your default AWS account/region
-* `npx cdk diff`         compare deployed stack with current state
-* `npx cdk synth`        emits the synthesized CloudFormation template
+* `cdk deploy`       deploy this stack to your default AWS account/region
+* `cdk diff`         compare deployed stack with current state
+* `cdk synth`        emits the synthesized CloudFormation template
