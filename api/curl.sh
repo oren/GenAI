@@ -6,13 +6,6 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-# curl -X POST \
-#   "$1" \
-#   -H "Content-Type: application/json" \
-#   -d '{
-#     "prompt": "$2"
-#   }'
-
 URL="$1"
 PROMPT="$2"
 

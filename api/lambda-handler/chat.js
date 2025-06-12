@@ -9,11 +9,7 @@ const client = new BedrockRuntimeClient({ region: process.env.AWS_REGION });
 // This will be overridden by the environment variable if set in CDK/Lambda config.
 const MODEL_ID = process.env.MODEL_ID || "amazon.titan-text-lite-v1";
 
-// For Titan, maxTokenCount is a common parameter name.
-// This will be overridden by the environment variable if set.
 const MAX_TOKENS_TO_GENERATE = parseInt(process.env.MAX_TOKENS || "512");
-
-// ANTHROPIC_VERSION is not needed for Titan models, so it's removed.
 
 exports.handler = async (event) => {
     console.log("Received event:", JSON.stringify(event, null, 2));
@@ -54,7 +50,7 @@ exports.handler = async (event) => {
     const params = {
         modelId: MODEL_ID,
         contentType: "application/json",
-        accept: "application/json", // Titan also accepts application/json
+        accept: "application/json",
         body: JSON.stringify(bedrockRequestBody),
     };
 
@@ -69,14 +65,12 @@ exports.handler = async (event) => {
 
         // --- Response parsing for Amazon Titan Text Lite ---
         let completion = "";
-        // Titan models usually return an array of results, each with outputText.
         if (responseBody.results && Array.isArray(responseBody.results) && responseBody.results.length > 0) {
             completion = responseBody.results[0].outputText;
         } else if (responseBody.outputText) { // Fallback for some simpler Titan response structures
              completion = responseBody.outputText;
         } else {
             console.error("Unexpected Bedrock response structure:", responseBody);
-            // It's good practice to still throw an error if the expected output isn't found
             throw new Error("Failed to parse completion from Bedrock response. Output structure not recognized.");
         }
         // --- End Response parsing ---

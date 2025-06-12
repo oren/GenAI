@@ -6,7 +6,7 @@ const integrations = require('aws-cdk-lib/aws-apigatewayv2-integrations');
 const iam = require('aws-cdk-lib/aws-iam');
 const path = require('path');
 
-class MyGenAiChatbotStack extends Stack {
+class ChatStack extends Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
@@ -14,27 +14,22 @@ class MyGenAiChatbotStack extends Stack {
 
     // 1. Lambda Function
     const chatLambda = new lambda.NodejsFunction(this, 'ChatHandler', {
-      runtime: require('aws-cdk-lib/aws-lambda').Runtime.NODEJS_18_X, // Or newer
+      runtime: require('aws-cdk-lib/aws-lambda').Runtime.NODEJS_18_X,
       entry: path.join(__dirname, '../lambda-handler/chat.js'),
       handler: 'handler',
       timeout: Duration.seconds(90), // Bedrock can take some time
       bundling: {
         forceDockerBundling: false,
-        externalModules: [ // Already included in Lambda runtime or AWS SDK v3 which is modular
-          // '@aws-sdk/client-bedrock-runtime' // No need to bundle if using SDK v3 provided by Lambda
+        externalModules: [
         ],
       },
       environment: {
         MODEL_ID: CHOSEN_MODEL_ID,
         MAX_TOKENS: "512",
-        // AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1' // Good practice for SDK v2, v3 handles this better
       },
     });
 
     // 2. IAM Permissions for Lambda to invoke Bedrock
-    // Ensure the model ARN matches the region and model ID you are using
-    // You can use a wildcard for the model ID part if you want to allow multiple models from a provider
-    // e.g., arn:aws:bedrock:${this.region}::foundation-model/anthropic.*
     const bedrockPolicy = new iam.PolicyStatement({
       actions: ['bedrock:InvokeModel'],
       resources: [
@@ -43,17 +38,16 @@ class MyGenAiChatbotStack extends Stack {
     });
     chatLambda.addToRolePolicy(bedrockPolicy);
 
-    // 3. API Gateway (HTTP API - simpler and cheaper than REST API)
+    // 3. API Gateway
     const httpApi = new apigw.HttpApi(this, 'GenAiChatbotApi', {
       description: 'API for Gen AI Chatbot',
-      corsPreflight: { // Optional: configure CORS for browser-based clients
+      corsPreflight: {
         allowHeaders: ['Content-Type', 'X-Amz-Date', 'Authorization', 'X-Api-Key', 'X-Amz-Security-Token'],
         allowMethods: [
           apigw.CorsHttpMethod.OPTIONS,
           apigw.CorsHttpMethod.POST,
         ],
-        allowOrigins: ['*'], // Be more restrictive in production
-        // allowCredentials: true, // If you need cookies/auth headers
+        allowOrigins: ['*'],
       },
     });
 
@@ -68,10 +62,10 @@ class MyGenAiChatbotStack extends Stack {
 
     // 5. Output the API endpoint URL
     new CfnOutput(this, 'ApiEndpoint', {
-      value: httpApi.url + 'chat', // append the path
+      value: httpApi.url + 'chat',
       description: 'The endpoint URL for the Chatbot API',
     });
   }
 }
 
-module.exports = { MyGenAiChatbotStack };
+module.exports = { ChatStack };
