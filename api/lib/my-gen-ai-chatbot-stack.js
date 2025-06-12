@@ -26,7 +26,7 @@ class MyGenAiChatbotStack extends Stack {
       },
       environment: {
         MODEL_ID: CHOSEN_MODEL_ID,
-        MAX_TOKENS: "500", // Adjust as needed
+        MAX_TOKENS: "512",
         // AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1' // Good practice for SDK v2, v3 handles this better
       },
     });

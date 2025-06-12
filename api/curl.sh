@@ -1,8 +1,24 @@
 #!/bin/sh
 
+if [ "$#" -ne 2 ]; then
+  echo "Error: Missing arguments. Exactly two arguments are required." >&2
+  echo "Usage: $0 <URL> <Prompt>" >&2
+  exit 1
+fi
+
+# curl -X POST \
+#   "$1" \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#     "prompt": "$2"
+#   }'
+
+URL="$1"
+PROMPT="$2"
+
 curl -X POST \
-  https://xv7sjhw21m.execute-api.us-west-2.amazonaws.com/chat \
+  "${URL}" \
   -H "Content-Type: application/json" \
-  -d '{
-    "prompt": "Hello, who are you and what can you do?"
-  }'
+  -d "{
+  \"prompt\": \"${PROMPT}\"
+  }"
