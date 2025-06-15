@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessageDiv = document.getElementById('errorMessage');
 
     // --- CONFIGURATION ---
-    const API_ENDPOINT_URL = 'https://knyatp279k.execute-api.us-west-2.amazonaws.com/chat'
+    const API_ENDPOINT_URL = 'https://yjqq7soesa.execute-api.us-west-2.amazonaws.com/chat'
 
     function addMessageToChat(text, sender) {
         const messageDiv = document.createElement('div');

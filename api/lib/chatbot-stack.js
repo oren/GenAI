@@ -1,4 +1,4 @@
-// lib/my-gen-ai-chatbot-stack.js
+// lib/chatbot-stack.js
 const { Stack, Duration, CfnOutput } = require('aws-cdk-lib');
 const lambda = require('aws-cdk-lib/aws-lambda-nodejs');
 const apigw = require('aws-cdk-lib/aws-apigatewayv2');

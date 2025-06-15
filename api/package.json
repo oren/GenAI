@@ -1,8 +1,8 @@
 {
-  "name": "my-gen-ai-chatbot",
+  "name": "gen-ai-chatbot",
   "version": "0.1.0",
   "bin": {
-    "my-gen-ai-chatbot": "bin/my-gen-ai-chatbot.js"
+    "chatbot": "bin/chatbot.js"
   },
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",

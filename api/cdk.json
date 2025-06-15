@@ -1,5 +1,5 @@
 {
-  "app": "node bin/my-gen-ai-chatbot.js",
+  "app": "node bin/chatbot.js",
   "watch": {
     "include": [
       "**"
